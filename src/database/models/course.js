@@ -7,4 +7,4 @@ const courseSchema = new Schema({
 
 const Course = new model("course", courseSchema);
 
-export { Course };
+export { Course }; 

@@ -8,4 +8,4 @@ const buildingSchema = new Schema({
 
 const Building = new model("building", buildingSchema);
 
-export { Building };
+export { Building }; 

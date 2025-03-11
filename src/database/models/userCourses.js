@@ -7,4 +7,4 @@ const userCoursesSchema = new Schema({
 
 const UserCourse = new model("userCourse", userCoursesSchema);
 
-export { UserCourse };
+export { UserCourse }; 

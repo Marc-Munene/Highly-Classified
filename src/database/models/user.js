@@ -5,7 +5,11 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   regNo: { type: String, unique: true },
   course: { type: String },
-  role: { type: String, enum: ["student", "lecturer", "classrep"] },
+  role: {
+    type: String,
+    enum: ["student", "lecturer", "classrep", "user"],
+    default: "user",
+  },
 });
 
 const User = new model("user", userSchema);
