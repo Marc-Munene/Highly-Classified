@@ -61,6 +61,31 @@ app.delete("/", (req, res) => {
   });
 });
 
+//units
+app.get("/units", (req, res) => {
+  res.json({
+    message: "getting units",
+  });
+});
+
+app.post("/units", (req, res) => {
+  res.json({
+    message: "adding units",
+  });
+});
+
+app.put("/units", (req, res) => {
+  res.json({
+    message: "editing units",
+  });
+});
+
+app.delete("/units", (req, res) => {
+  res.json({
+    message: "deleting units",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);
 });
