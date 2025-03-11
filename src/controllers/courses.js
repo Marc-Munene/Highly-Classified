@@ -6,18 +6,18 @@ export const getCourses = (req, res) => {
 
 export const addCourses = (req, res) => {
   res.json({
-    message: "adding units",
+    message: "adding courses",
   });
 };
 
 export const editCourses = (req, res) => {
   res.json({
-    message: "editing units",
+    message: "editing courses",
   });
 };
 
 export const deleteCourses = (req, res) => {
   res.json({
-    message: "deleting units",
+    message: "deleting course",
   });
 };

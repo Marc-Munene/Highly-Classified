@@ -2,9 +2,9 @@ import express from "express";
 import { getHome } from "./controllers/home.js";
 import {
   addUsers,
+  deleteUsers,
   editUsers,
   getUsers,
-  removeUsers,
 } from "./controllers/users.js";
 import {
   addCourses,
@@ -12,6 +12,12 @@ import {
   editCourses,
   getCourses,
 } from "./controllers/courses.js";
+import {
+  addUnits,
+  deleteUnits,
+  editUnits,
+  getUnits,
+} from "./controllers/units.js";
 
 const app = express();
 
@@ -27,41 +33,25 @@ app.post("/users", addUsers);
 
 app.put("/users", editUsers);
 
-app.delete("/users", removeUsers);
+app.delete("/users", deleteUsers);
 
 //courses
 app.get("/courses", getCourses);
 
-app.post("/courses", (req, res) => {
-  res.json({
-    message: "adding courses",
-  });
-});
+app.post("/courses", addCourses);
 
-app.put("/courses", (req, res) => {
-  res.json({
-    message: "editing coursers",
-  });
-});
+app.put("/courses", editCourses);
 
-app.delete("/courses", (req, res) => {
-  res.json({
-    message: "deleting courses",
-  });
-});
+app.delete("/courses", deleteCourses);
 
 //units
-app.get("/units", (req, res) => {
-  res.json({
-    message: "getting units",
-  });
-});
+app.get("/units", getUnits);
 
-app.post("/units", addCourses);
+app.post("/units", addUnits);
 
-app.put("/units", editCourses);
+app.put("/units", editUnits);
 
-app.delete("/units", deleteCourses);
+app.delete("/units", deleteUnits);
 
 //sessions
 

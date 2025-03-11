@@ -16,7 +16,7 @@ export const editUsers = (req, res) => {
   });
 };
 
-export const removeUsers = (req, res) => {
+export const deleteUsers = (req, res) => {
   res.json({
     message: "deleting users",
   });
