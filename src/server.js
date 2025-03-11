@@ -18,6 +18,18 @@ import {
   editUnits,
   getUnits,
 } from "./controllers/units.js";
+import {
+  addSessions,
+  deleteSessions,
+  editSessions,
+  getSessions,
+} from "./controllers/sessions.js";
+import {
+  addBuildings,
+  deleteBuildings,
+  editBuildings,
+  getBuildings,
+} from "./controllers/buildings.js";
 
 const app = express();
 
@@ -55,54 +67,22 @@ app.delete("/units", deleteUnits);
 
 //sessions
 
-app.get("/sessions", (req, res) => {
-  res.json({
-    message: "getting sessions",
-  });
-});
+app.get("/sessions", getSessions);
 
-app.post("/sessions", (req, res) => {
-  res.json({
-    message: "adding sessions",
-  });
-});
+app.post("/sessions", addSessions);
 
-app.put("/sessions", (req, res) => {
-  res.json({
-    message: "editing sessions",
-  });
-});
+app.put("/sessions", editSessions);
 
-app.delete("/sessions", (req, res) => {
-  res.json({
-    message: "deleting sessions",
-  });
-});
+app.delete("/sessions", deleteSessions);
 
 //buildings
-app.get("/buildings", (req, res) => {
-  res.json({
-    message: "getting buildings",
-  });
-});
+app.get("/buildings", getBuildings);
 
-app.post("/buildings", (req, res) => {
-  res.json({
-    message: "adding buildings",
-  });
-});
+app.post("/buildings", addBuildings);
 
-app.put("/buildings", (req, res) => {
-  res.json({
-    message: "editing buildings",
-  });
-});
+app.put("/buildings", editBuildings);
 
-app.delete("/buildings", (req, res) => {
-  res.json({
-    message: "deleting buildings",
-  });
-});
+app.delete("/buildings", deleteBuildings);
 
 //classes
 app.get("/classes", (req, res) => {
