@@ -1,47 +1,36 @@
 import express from "express";
+import { getHome } from "./controllers/home.js";
+import {
+  addUsers,
+  editUsers,
+  getUsers,
+  removeUsers,
+} from "./controllers/users.js";
+import {
+  addCourses,
+  deleteCourses,
+  editCourses,
+  getCourses,
+} from "./controllers/courses.js";
 
 const app = express();
 
 const PORT = process.env.PORT;
 
 //home route
-app.get("/", (req, res) => {
-  res.json({
-    message: "This is the home page",
-  });
-});
+app.get("/", getHome);
 
 //users
-app.get("/users", (req, res) => {
-  res.json({
-    message: "getting users",
-  });
-});
+app.get("/users", getUsers);
 
-app.post("/users", (req, res) => {
-  res.json({
-    message: "adding users",
-  });
-});
+app.post("/users", addUsers);
 
-app.put("/users", (req, res) => {
-  res.json({
-    message: "editing users",
-  });
-});
+app.put("/users", editUsers);
 
-app.delete("/users", (req, res) => {
-  res.json({
-    message: "deleting users",
-  });
-});
+app.delete("/users", removeUsers);
 
 //courses
-app.get("/courses", (req, res) => {
-  res.json({
-    message: "Getting courses",
-  });
-});
+app.get("/courses", getCourses);
 
 app.post("/courses", (req, res) => {
   res.json({
@@ -68,23 +57,11 @@ app.get("/units", (req, res) => {
   });
 });
 
-app.post("/units", (req, res) => {
-  res.json({
-    message: "adding units",
-  });
-});
+app.post("/units", addCourses);
 
-app.put("/units", (req, res) => {
-  res.json({
-    message: "editing units",
-  });
-});
+app.put("/units", editCourses);
 
-app.delete("/units", (req, res) => {
-  res.json({
-    message: "deleting units",
-  });
-});
+app.delete("/units", deleteCourses);
 
 //sessions
 
@@ -134,6 +111,31 @@ app.put("/buildings", (req, res) => {
 app.delete("/buildings", (req, res) => {
   res.json({
     message: "deleting buildings",
+  });
+});
+
+//classes
+app.get("/classes", (req, res) => {
+  res.json({
+    message: "getting classes",
+  });
+});
+
+app.post("/classes", (req, res) => {
+  res.json({
+    message: "adding classes",
+  });
+});
+
+app.put("/classes", (req, res) => {
+  res.json({
+    message: "editing classes",
+  });
+});
+
+app.delete("/classes", (req, res) => {
+  res.json({
+    message: "deleting classes",
   });
 });
 
