@@ -36,8 +36,11 @@ import {
   editClasses,
   getClasses,
 } from "./controllers/classes.js";
+import { connectDB } from "./database/config.js";
 
 const app = express();
+
+connectDB();
 
 const PORT = process.env.PORT;
 
