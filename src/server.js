@@ -36,6 +36,31 @@ app.delete("/", (req, res) => {
   });
 });
 
+//courses
+app.get("/courses", (req, res) => {
+  res.json({
+    message: "Getting courses",
+  });
+});
+
+app.post("/courses", (req, res) => {
+  res.json({
+    message: "adding courses",
+  });
+});
+
+app.put("/courses", (req, res) => {
+  res.json({
+    message: "editing coursers",
+  });
+});
+
+app.delete("/", (req, res) => {
+  res.json({
+    message: "deleting courses",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);
 });
