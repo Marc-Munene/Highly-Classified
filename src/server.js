@@ -30,6 +30,12 @@ import {
   editBuildings,
   getBuildings,
 } from "./controllers/buildings.js";
+import {
+  addClasses,
+  deleteClasses,
+  editClasses,
+  getClasses,
+} from "./controllers/classes.js";
 
 const app = express();
 
@@ -85,29 +91,13 @@ app.put("/buildings", editBuildings);
 app.delete("/buildings", deleteBuildings);
 
 //classes
-app.get("/classes", (req, res) => {
-  res.json({
-    message: "getting classes",
-  });
-});
+app.get("/classes", getClasses);
 
-app.post("/classes", (req, res) => {
-  res.json({
-    message: "adding classes",
-  });
-});
+app.post("/classes", addClasses);
 
-app.put("/classes", (req, res) => {
-  res.json({
-    message: "editing classes",
-  });
-});
+app.put("/classes", editClasses);
 
-app.delete("/classes", (req, res) => {
-  res.json({
-    message: "deleting classes",
-  });
-});
+app.delete("/classes", deleteClasses);
 
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);
