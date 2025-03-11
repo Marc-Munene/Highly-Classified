@@ -112,6 +112,31 @@ app.delete("/sessions", (req, res) => {
   });
 });
 
+//buildings
+app.get("/buildings", (req, res) => {
+  res.json({
+    message: "getting buildings",
+  });
+});
+
+app.post("/buildings", (req, res) => {
+  res.json({
+    message: "adding buildings",
+  });
+});
+
+app.put("/buildings", (req, res) => {
+  res.json({
+    message: "editing buildings",
+  });
+});
+
+app.delete("/buildings", (req, res) => {
+  res.json({
+    message: "deleting buildings",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);
 });
