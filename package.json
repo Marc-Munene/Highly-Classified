@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon --env-file=.env src/server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marc-Munene/Highly-Classified.git"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Marc-Munene/Highly-Classified/issues"
+  },
+  "homepage": "https://github.com/Marc-Munene/Highly-Classified#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
