@@ -37,6 +37,7 @@ import {
   getClasses,
 } from "./controllers/classes.js";
 import { connectDB } from "./database/config.js";
+import { userRouter } from "./routes/userRoute.js";
 
 const app = express();
 
@@ -46,15 +47,6 @@ const PORT = process.env.PORT;
 
 //home route
 app.get("/", getHome);
-
-//users
-app.get("/users", getUsers);
-
-app.post("/users", addUsers);
-
-app.put("/users", editUsers);
-
-app.delete("/users", deleteUsers);
 
 //courses
 app.get("/courses", getCourses);
@@ -101,6 +93,9 @@ app.post("/classes", addClasses);
 app.put("/classes", editClasses);
 
 app.delete("/classes", deleteClasses);
+
+//routing
+app.use("/api", userRouter);
 
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);

@@ -1,7 +1,20 @@
-export const getUsers = (req, res) => {
-  res.json({
-    message: "getting users",
-  });
+import { User } from "../database/models/user";
+
+export const getUsers = async (req, res) => {
+  try {
+    const users = User.find();
+
+    res.status(200).json({
+      success: true,
+      data: users,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "User not found!",
+    });
+  }
 };
 
 export const addUsers = (req, res) => {
