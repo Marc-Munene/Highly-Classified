@@ -19,12 +19,7 @@ import {
   editSessions,
   getSessions,
 } from "./controllers/sessions.js";
-import {
-  addBuildings,
-  deleteBuildings,
-  editBuildings,
-  getBuildings,
-} from "./controllers/buildings.js";
+
 import {
   addClasses,
   deleteClasses,
@@ -33,6 +28,7 @@ import {
 } from "./controllers/classes.js";
 import { connectDB } from "./database/config.js";
 import { userRouter } from "./routes/userRoute.js";
+import { buildingRouter } from "./routes/buildingRoute.js";
 
 const app = express();
 
@@ -73,15 +69,6 @@ app.put("/sessions", editSessions);
 
 app.delete("/sessions", deleteSessions);
 
-//buildings
-app.get("/buildings", getBuildings);
-
-app.post("/buildings", addBuildings);
-
-app.put("/buildings", editBuildings);
-
-app.delete("/buildings", deleteBuildings);
-
 //classes
 app.get("/classes", getClasses);
 
@@ -92,7 +79,7 @@ app.put("/classes", editClasses);
 app.delete("/classes", deleteClasses);
 
 //routing
-app.use("/api", userRouter);
+app.use("/api", userRouter, buildingRouter);
 
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);
