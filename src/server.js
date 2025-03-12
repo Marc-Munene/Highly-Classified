@@ -9,13 +9,6 @@ import {
 } from "./controllers/units.js";
 
 import {
-  addSessions,
-  deleteSessions,
-  editSessions,
-  getSessions,
-} from "./controllers/sessions.js";
-
-import {
   addClasses,
   deleteClasses,
   editClasses,
@@ -46,16 +39,6 @@ app.post("/units", addUnits);
 app.put("/units", editUnits);
 
 app.delete("/units", deleteUnits);
-
-//sessions
-
-app.get("/sessions", getSessions);
-
-app.post("/sessions", addSessions);
-
-app.put("/sessions", editSessions);
-
-app.delete("/sessions", deleteSessions);
 
 //classes
 app.get("/classes", getClasses);
