@@ -1,11 +1,6 @@
 import express from "express";
 import { getHome } from "./controllers/home.js";
-import {
-  addUsers,
-  deleteUsers,
-  editUsers,
-  getUsers,
-} from "./controllers/users.js";
+
 import {
   addCourses,
   deleteCourses,
@@ -40,6 +35,8 @@ import { connectDB } from "./database/config.js";
 import { userRouter } from "./routes/userRoute.js";
 
 const app = express();
+
+app.use(express.json());
 
 connectDB();
 

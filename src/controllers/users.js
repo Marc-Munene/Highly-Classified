@@ -1,4 +1,5 @@
 import { User } from "../database/models/user.js";
+import validator from "validator";
 
 //Getting all users
 export const getUsers = async (req, res) => {
@@ -40,7 +41,26 @@ export const getOneUser = async (req, res) => {
 //add users
 export const addUsers = async (req, res) => {
   const { name, email, regNo, role } = req.body;
+
   try {
+    if (!name || !email || !regNo) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({
+        message: "Invalid email format",
+      });
+    }
+
+    if (!email.endsWith(".students@gmail.com")) {
+      return res.status(400).json({
+        message: "Email must be a Gmail address (.students@gmail.com)",
+      });
+    }
+
     const userData = { name, email, regNo, role };
     const newUser = await User.create(userData);
 
@@ -52,14 +72,29 @@ export const addUsers = async (req, res) => {
     console.log(error);
     res.status(500).json({
       success: false,
-      message: "Faled!",
+      message: "Cannot add user",
     });
   }
 };
 
 export const editUsers = async (req, res) => {
   try {
-    const userId = req.query.userId;
+    const userId = req.query.id;
+    const { email } = req.body;
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid email format",
+      });
+    }
+
+    if (!email.endsWith(".students@gmail.com")) {
+      return res.status(400).json({
+        success: false,
+        message: "Email must be a Gmail address (.students@gmail.com)",
+      });
+    }
 
     const user = await User.findOneAndUpdate({ _id: userId }, req.body, {
       new: true,
