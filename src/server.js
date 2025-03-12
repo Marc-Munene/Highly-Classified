@@ -2,17 +2,12 @@ import express from "express";
 import { getHome } from "./controllers/home.js";
 
 import {
-  addCourses,
-  deleteCourses,
-  editCourses,
-  getCourses,
-} from "./controllers/courses.js";
-import {
   addUnits,
   deleteUnits,
   editUnits,
   getUnits,
 } from "./controllers/units.js";
+
 import {
   addSessions,
   deleteSessions,
@@ -26,9 +21,11 @@ import {
   editClasses,
   getClasses,
 } from "./controllers/classes.js";
+
 import { connectDB } from "./database/config.js";
 import { userRouter } from "./routes/userRoute.js";
 import { buildingRouter } from "./routes/buildingRoute.js";
+import { courseRouter } from "./routes/courseRouter.js";
 
 const app = express();
 
@@ -40,15 +37,6 @@ const PORT = process.env.PORT;
 
 //home route
 app.get("/", getHome);
-
-//courses
-app.get("/courses", getCourses);
-
-app.post("/courses", addCourses);
-
-app.put("/courses", editCourses);
-
-app.delete("/courses", deleteCourses);
 
 //units
 app.get("/units", getUnits);
@@ -79,7 +67,7 @@ app.put("/classes", editClasses);
 app.delete("/classes", deleteClasses);
 
 //routing
-app.use("/api", userRouter, buildingRouter);
+app.use("/api", userRouter, buildingRouter, courseRouter);
 
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);
