@@ -39,90 +39,111 @@ export const getOneUser = async (req, res) => {
 };
 
 //add users
-// export const addUsers = async (req, res) => {
-//   const { name, email, regNo, role } = req.body;
-
-//   try {
-//     if (!name || !email || !regNo) {
-//       return res.status(400).json({
-//         message: "All fields are required",
-//       });
-//     }
-
-//     if (!validator.isEmail(email)) {
-//       return res.status(400).json({
-//         message: "Invalid email format",
-//       });
-//     }
-
-//     if (!email.endsWith(".students@gmail.com")) {
-//       return res.status(400).json({
-//         message: "Email must be a Gmail address (.students@gmail.com)",
-//       });
-//     }
-
-//     const userData = { name, email, regNo, role };
-//     const newUser = await User.create(userData);
-
-//     res.status(200).json({
-//       success: true,
-//       data: newUser,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({
-//       success: false,
-//       message: "Cannot add user",
-//     });
-//   }
-// };
-
 export const addUsers = async (req, res) => {
-  const users = req.body; // Expecting an array of user objects
+  const { name, email, regNo, role } = req.body;
 
-  if (!Array.isArray(users) || users.length === 0) {
-    return res.status(400).json({ message: "Input must be a non-empty array" });
-  }
-
-  // Validate each user in the array
-  for (const user of users) {
-    const { name, email, regNo, role } = user;
-
+  try {
     if (!name || !email || !regNo) {
       return res.status(400).json({
-        message: "All fields are required for each user",
+        message: "All fields are required",
       });
     }
 
     if (!validator.isEmail(email)) {
       return res.status(400).json({
-        message: `Invalid email format for user: ${email}`,
+        message: "Invalid email format",
       });
     }
 
     if (!email.endsWith(".students@gmail.com")) {
       return res.status(400).json({
-        message: `Email must be a Gmail address (.students@gmail.com) for user: ${email}`,
+        message: "Email must be a Gmail address (.students@gmail.com)",
       });
     }
-  }
 
-  try {
-    // Insert all users at once
-    const newUsers = await User.insertMany(users);
+    const existingUser = await User.findOne({ $or: [{ email }, { regNo }] });
+
+    if (existingUser) {
+      if (existingUser.email === email && existingUser.regNo) {
+        return res.status(409).json({
+          success: false,
+          message: "Email and regNo already exist!",
+        });
+      } else if (existingUser.email === email) {
+        return res.status(409).json({
+          success: false,
+          message: "Email already exist",
+        });
+      } else {
+        return res.status(409).json({
+          success: false,
+          message: "Registration alredy exists!",
+        });
+      }
+    }
+
+    const userData = { name, email, regNo, role };
+    const newUser = await User.create(userData);
 
     res.status(200).json({
       success: true,
-      data: newUsers,
+      data: newUser,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       success: false,
-      message: "Cannot add users",
+      message: "Cannot add user",
     });
   }
 };
+
+// export const addUsers = async (req, res) => {
+//   const users = req.body; // Expecting an array of user objects
+
+//   if (!Array.isArray(users) || users.length === 0) {
+//     return res.status(400).json({ message: "Input must be a non-empty array" });
+//   }
+
+//   // Validate each user in the array
+//   for (const user of users) {
+//     const { name, email, regNo, role } = user;
+
+//     if (!name || !email || !regNo) {
+//       return res.status(400).json({
+//         message: "All fields are required for each user",
+//       });
+//     }
+
+//     if (!validator.isEmail(email)) {
+//       return res.status(400).json({
+//         message: `Invalid email format for user: ${email}`,
+//       });
+//     }
+
+//     if (!email.endsWith(".students@gmail.com")) {
+//       return res.status(400).json({
+//         message: `Email must be a Gmail address (.students@gmail.com) for user: ${email}`,
+//       });
+//     }
+//   }
+
+//   try {
+//     // Insert all users at once
+//     const newUsers = await User.insertMany(users);
+
+//     res.status(200).json({
+//       success: true,
+//       data: newUsers,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({
+//       success: false,
+//       message: "Cannot add users",
+//     });
+//   }
+// };
 
 export const editUsers = async (req, res) => {
   try {
