@@ -98,53 +98,7 @@ export const addUsers = async (req, res) => {
   }
 };
 
-// export const addUsers = async (req, res) => {
-//   const users = req.body; // Expecting an array of user objects
-
-//   if (!Array.isArray(users) || users.length === 0) {
-//     return res.status(400).json({ message: "Input must be a non-empty array" });
-//   }
-
-//   // Validate each user in the array
-//   for (const user of users) {
-//     const { name, email, regNo, role } = user;
-
-//     if (!name || !email || !regNo) {
-//       return res.status(400).json({
-//         message: "All fields are required for each user",
-//       });
-//     }
-
-//     if (!validator.isEmail(email)) {
-//       return res.status(400).json({
-//         message: `Invalid email format for user: ${email}`,
-//       });
-//     }
-
-//     if (!email.endsWith(".students@gmail.com")) {
-//       return res.status(400).json({
-//         message: `Email must be a Gmail address (.students@gmail.com) for user: ${email}`,
-//       });
-//     }
-//   }
-
-//   try {
-//     // Insert all users at once
-//     const newUsers = await User.insertMany(users);
-
-//     res.status(200).json({
-//       success: true,
-//       data: newUsers,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({
-//       success: false,
-//       message: "Cannot add users",
-//     });
-//   }
-// };
-
+//edit users
 export const editUsers = async (req, res) => {
   try {
     const userId = req.query.id;
