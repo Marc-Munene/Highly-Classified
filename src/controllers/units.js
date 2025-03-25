@@ -53,12 +53,42 @@ export const addUnits = async (req, res) => {
   }
 };
 
-export const editUnits = (req, res) => {
-  
+export const editUnits = async (req, res) => {
+  try {
+    const unitId = req.query.id;
+
+    const unitName = await Unit.findOneAndUpdate({ _id: unitId }, req.body, {
+      new: true,
+    });
+
+    res.status(200).json({
+      success: true,
+      data: unitName,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Cannot edit unit!",
+    });
+  }
 };
 
-export const deleteUnits = (req, res) => {
-  res.json({
-    message: "deleting units",
-  });
+export const deleteUnits = async (req, res) => {
+  try {
+    const unitId = req.query.id;
+
+    const deletedUnit = await Unit.deleteOne({ _id: unitId });
+
+    res.status(200).json({
+      success: true,
+      deletedCount: deletedUnit.deletedCount,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed!",
+    });
+  }
 };
