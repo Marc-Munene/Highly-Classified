@@ -2,13 +2,6 @@ import express from "express";
 
 import { getHome } from "./controllers/home.js";
 
-import {
-  addClasses,
-  deleteClasses,
-  editClasses,
-  getClasses,
-} from "./controllers/classes.js";
-
 import { connectDB } from "./database/config.js";
 import { userRouter } from "./routes/userRoute.js";
 import { buildingRouter } from "./routes/buildingRoute.js";
@@ -29,15 +22,6 @@ const PORT = process.env.PORT;
 
 //home route
 app.get("/", getHome);
-
-//classes
-app.get("/classes", getClasses);
-
-app.post("/classes", addClasses);
-
-app.put("/classes", editClasses);
-
-app.delete("/classes", deleteClasses);
 
 //routing
 app.use(
