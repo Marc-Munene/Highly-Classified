@@ -76,4 +76,21 @@ export const editBuildings = async (req, res) => {
 };
 
 //Delete buildings
-export const deleteBuildings = (req, res) => {};
+export const deleteBuildings = async (req, res) => {
+  try {
+    const buildingId = req.query.id;
+
+    const deletedBuilding = await Building.deleteOne({ _id: buildingId });
+
+    res.status(200).json({
+      success: false,
+      deletedCount: deletedBuilding.deletedCount,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      sucees: false,
+      message: "Failed to delete!",
+    });
+  }
+};
