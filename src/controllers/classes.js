@@ -101,8 +101,22 @@ export const editClasses = async (req, res) => {
   }
 };
 
-export const deleteClasses = (req, res) => {
-  res.json({
-    message: "deleting classes",
-  });
+//Delete Class
+export const deleteClasses = async (req, res) => {
+  try {
+    const classId = req.query.id;
+
+    const deletedClass = await Class.deleteOne({ _id: classId });
+
+    res.status(200).json({
+      success: true,
+      deletedCount: deletedClass.deletedCount,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete!",
+    });
+  }
 };
