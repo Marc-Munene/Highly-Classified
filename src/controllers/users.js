@@ -98,7 +98,7 @@ export const addUsers = async (req, res) => {
   }
 };
 
-//edit users
+//Edit users
 export const editUsers = async (req, res) => {
   try {
     const userId = req.query.id;
@@ -136,6 +136,7 @@ export const editUsers = async (req, res) => {
   }
 };
 
+//Delete users
 export const deleteUsers = async (req, res) => {
   try {
     const userId = req.query.id;
