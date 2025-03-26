@@ -16,13 +16,14 @@ export const getBuildings = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-
     res.status(500).json({
       success: false,
       message: "Failed!",
     });
   }
 };
+
+//Add buildings
 export const addBuildings = async (req, res) => {
   try {
     const { name, location, contactInfo } = req.body;
@@ -49,11 +50,30 @@ export const addBuildings = async (req, res) => {
     });
   }
 };
-export const editBuildings = (req, res) => {
-  const buildingId = req.query.id;
+
+//Edit buildings
+export const editBuildings = async (req, res) => {
+  try {
+    const buildingId = req.query.id;
+
+    const building = await Building.findOneAndUpdate(
+      { _id: buildingId },
+      req.body,
+      { new: true }
+    );
+
+    res.status(200).json({
+      succes: true,
+      data: building,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      succes: false,
+      message: "Failed to edit!",
+    });
+  }
 };
-export const deleteBuildings = (req, res) => {
-  res.json({
-    message: "delete buildings",
-  });
-};
+
+//Delete buildings
+export const deleteBuildings = (req, res) => {};
