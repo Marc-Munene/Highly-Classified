@@ -1,18 +1,27 @@
 import { Building } from "../database/models/building.js";
 
 export const getBuildings = async (req, res) => {
-  const buildings = await Building.find();
+  try {
+    const buildings = await Building.find();
 
-  if (!buildings) {
-    return res.status(409).json({
-      message: "No buldings in database",
+    if (!buildings) {
+      return res.status(409).json({
+        message: "No buldings in database",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: buildings,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed!",
     });
   }
-
-  res.status(200).json({
-    success: true,
-    data: buildings,
-  });
 };
 export const addBuildings = async (req, res) => {
   try {
@@ -41,9 +50,7 @@ export const addBuildings = async (req, res) => {
   }
 };
 export const editBuildings = (req, res) => {
-  res.json({
-    message: "edit buildings",
-  });
+  const buildingId = req.query.id;
 };
 export const deleteBuildings = (req, res) => {
   res.json({
