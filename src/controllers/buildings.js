@@ -1,8 +1,17 @@
 import { Building } from "../database/models/building.js";
 
-export const getBuildings = (req, res) => {
-  res.json({
-    message: "getting buildings",
+export const getBuildings = async (req, res) => {
+  const buildings = await Building.find();
+
+  if (!buildings) {
+    return res.status(409).json({
+      message: "No buldings in database",
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    data: buildings,
   });
 };
 export const addBuildings = async (req, res) => {
@@ -14,7 +23,7 @@ export const addBuildings = async (req, res) => {
         message: "All fields are required",
       });
     }
-    
+
     const buildingData = { name, location, contactInfo };
 
     const newBuilding = await Building.create(buildingData);
