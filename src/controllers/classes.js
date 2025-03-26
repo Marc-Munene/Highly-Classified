@@ -1,6 +1,7 @@
 import { Building } from "../database/models/building.js";
 import { Class } from "../database/models/class.js";
 
+//Get classes
 export const getClasses = async (req, res) => {
   try {
     const classes = await Class.find().populate("building");
@@ -18,6 +19,7 @@ export const getClasses = async (req, res) => {
   }
 };
 
+//Add classes
 export const addClasses = async (req, res) => {
   try {
     const { building, name, capacity, status } = req.body;
