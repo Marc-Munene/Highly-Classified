@@ -1,5 +1,6 @@
 import { Course } from "../database/models/course.js";
 
+//Get courses
 export const getCourses = async (req, res) => {
   try {
     const courses = await Course.find();
@@ -23,32 +24,7 @@ export const getCourses = async (req, res) => {
   }
 };
 
-// export const addCourses = async (req, res) => {
-//   try {
-//     const { name, school } = req.body;
-
-//     if (!name || !school) {
-//       return res.status(400).json({
-//         message: "Name and School fields are required",
-//       });
-//     }
-
-//     const courseData = { name, school };
-//     const newCourse = await Course.create(courseData);
-
-//     res.status(200).json({
-//       success: true,
-//       data: newCourse,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to add1",
-//     });
-//   }
-// };
-
+// Add courses
 export const addCourses = async (req, res) => {
   try {
     const { name, school } = req.body;
@@ -104,6 +80,7 @@ export const addCourses = async (req, res) => {
   }
 };
 
+//Edit Courses
 export const editCourses = async (req, res) => {
   try {
     const courseId = req.query.id;
@@ -129,6 +106,7 @@ export const editCourses = async (req, res) => {
   }
 };
 
+//Delete courses
 export const deleteCourses = async (req, res) => {
   try {
     const courseId = req.query.id;
