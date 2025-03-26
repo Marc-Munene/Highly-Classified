@@ -1,5 +1,6 @@
 import { Unit } from "../database/models/unit.js";
 
+//Get units
 export const getUnits = async (req, res) => {
   try {
     const units = await Unit.find();
@@ -17,6 +18,7 @@ export const getUnits = async (req, res) => {
   }
 };
 
+//Add units
 export const addUnits = async (req, res) => {
   const { name, unitCode } = req.body;
 
@@ -53,6 +55,7 @@ export const addUnits = async (req, res) => {
   }
 };
 
+//Edit Units
 export const editUnits = async (req, res) => {
   try {
     const unitId = req.query.id;
@@ -74,6 +77,7 @@ export const editUnits = async (req, res) => {
   }
 };
 
+//Delete units
 export const deleteUnits = async (req, res) => {
   try {
     const unitId = req.query.id;
