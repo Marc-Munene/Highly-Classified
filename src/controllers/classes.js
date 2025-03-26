@@ -29,6 +29,31 @@ export const addClasses = async (req, res) => {
         message: "Name and Capacity are required",
       });
     }
+
+    // Normalize the name by removing all whitespace and converting to lowercase
+    const normalizedNewName = name.replace(/\s+/g, "").toLowerCase();
+
+    // Check if a class with similar normalized name already exists
+    const existingClass = await Class.findOne({
+      $expr: {
+        $eq: [
+          {
+            $toLower: {
+              $replaceAll: { input: "$name", find: " ", replacement: "" },
+            },
+          },
+          normalizedNewName,
+        ],
+      },
+    });
+
+    if (existingClass) {
+      return res.status(409).json({
+        success: false,
+        message: "Class name already exists",
+      });
+    }
+
     const classData = { name, capacity, status };
 
     const newClass = await Class.create(classData);
@@ -47,15 +72,33 @@ export const addClasses = async (req, res) => {
     console.log(error);
     res.status(500).json({
       success: false,
-      message: "Faled!",
+      message: "Failed!",
     });
   }
 };
 
-export const editClasses = (req, res) => {
-  res.json({
-    message: "editing classes",
-  });
+//Edit class
+export const editClasses = async (req, res) => {
+  try {
+    const classId = req.query.id;
+
+    const editedClass = await Class.findOneAndUpdate(
+      { _id: classId },
+      req.body,
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      data: editedClass,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Faled to edit!",
+    });
+  }
 };
 
 export const deleteClasses = (req, res) => {
