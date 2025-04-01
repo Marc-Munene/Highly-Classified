@@ -5,6 +5,7 @@ import {
   editCourses,
   getCourses,
 } from "../controllers/courses.js";
+import { getSingleCourse } from "../controllers/courseUnit.js";
 
 const courseRouter = Router();
 

@@ -8,6 +8,7 @@ import { buildingRouter } from "./routes/buildingRoute.js";
 import { courseRouter } from "./routes/courseRouter.js";
 import { unitRouter } from "./routes/unitRouter.js";
 import { classRouter } from "./routes/classRouter.js";
+import { courseUnitRouter } from "./routes/courseUnitRoute.js";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(
   userRouter,
   buildingRouter,
   courseRouter,
+  courseUnitRouter,
   unitRouter,
   classRouter
 );
